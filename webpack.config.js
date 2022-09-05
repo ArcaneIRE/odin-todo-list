@@ -3,16 +3,16 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index/index.js',
+  entry: './src/index.js',
   output: {
-    filename: 'main.js',
+    filename: 'app.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   plugins: [
     new htmlWebpackPlugin({
         title: 'Todo List',
-        template: './src/index/index.html',
+        template: './src/index.html',
         filename: './index.html',
     })
   ]
