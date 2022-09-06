@@ -5,8 +5,8 @@ export default class TodoGroupsContainer {
         this.groups = []
     }
 
-    newTodoGroup (name) {
-        this.groups.push(new TodoGroup(name));
+    newTodoGroup (title) {
+        this.groups.push(new TodoGroup(title));
     }
     
     deleteTodoGroup(index) {
@@ -14,6 +14,6 @@ export default class TodoGroupsContainer {
     }
     
     getAllTodoGroups() {
-        return projects;
+        return this.groups;
     }
 }

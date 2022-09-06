@@ -1,8 +1,8 @@
 import Todo from "./Todo";
 
 export default class TodoGroup {
-    constructor (name) {
-        this.name = name;
+    constructor (title) {
+        this.title = title;
         this.todos = [];
     }
 
