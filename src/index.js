@@ -1,4 +1,5 @@
 import ViewController from "./view/ViewController";
+import css from "./index.css";
 
 const root = document.getElementById('app');
 const view = new ViewController(root);
