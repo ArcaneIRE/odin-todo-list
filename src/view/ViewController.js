@@ -1,4 +1,4 @@
-import TodoGroupsContainer from "./TodoGroupsContainer";
+import TodoGroupsContainer from "../logic/TodoGroupsContainer";
 import * as htmlGenerator from "./HtmlGenerator";
 
 export default class viewController {
