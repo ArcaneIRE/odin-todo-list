@@ -37,4 +37,4 @@ function newTodoElement(todo) {
     return todoElement;
 }
 
-export { newTodoGroupElement as newTodoGroupElement }
+export { newTodoGroupElement }

@@ -1,5 +1,5 @@
 import TodoGroupsContainer from "../logic/TodoGroupsContainer";
-import * as htmlGenerator from "./HtmlGenerator";
+import * as elementGenerator from "./elementGenerator";
 
 export default class viewController {
     constructor(rootElement) {
@@ -9,11 +9,17 @@ export default class viewController {
 
     updateView() {
         this.clearView();
+        this.renderHeader();
         this.renderTodoGroups();   
     }
 
     clearView() {
         this.root.innerHTML = '';
+    }
+
+    renderHeader() {
+        let header = elementGenerator.newHeaderElement();
+        this.root.appendChild(header);
     }
 
     renderTodoGroups() {
@@ -24,7 +30,7 @@ export default class viewController {
     }
 
     renderTodoGroup(group) {
-        const groupNode = htmlGenerator.newTodoGroupElement(group);
+        const groupNode = elementGenerator.newTodoGroupElement(group);
         this.root.appendChild(groupNode);
     }
 }
