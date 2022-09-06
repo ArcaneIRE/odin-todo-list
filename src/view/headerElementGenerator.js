@@ -16,7 +16,7 @@ class HeaderGenerator {
     addTitle() {
         const title = document.createElement('h1');
         title.classList = 'header-title';
-        title.innerText = 'Todo List';
+        title.innerText = 'Todo List.';
 
         this.header.appendChild(title);
     }
@@ -24,7 +24,7 @@ class HeaderGenerator {
     addNewGroupButton() {
         const newGroupButton = document.createElement('button');
         newGroupButton.classList = 'header-new-group-button';
-        newGroupButton.innerText = 'Add new group';
+        newGroupButton.innerText = 'Add List';
 
         this.header.appendChild(newGroupButton);
     }
