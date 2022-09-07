@@ -27,7 +27,7 @@ class viewController {
     
         const addProjectButton = document.createElement('button');
         addProjectButton.classList = 'header-new-group-button';
-        addProjectButton.innerText = 'Add List';
+        addProjectButton.innerText = 'Add Project';
         header.appendChild(addProjectButton);
     
         this.root.appendChild(header);
@@ -50,7 +50,7 @@ class viewController {
         const body = this.makeProjectBody(project);
         projectContainer.appendChild(body);
     
-        this.root.appendChild(projectElement);
+        this.root.appendChild(projectContainer);
     }
 
     makeProjectTitle(title) {
