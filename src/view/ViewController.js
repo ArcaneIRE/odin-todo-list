@@ -1,10 +1,9 @@
 import ProjectsContainer from "../logic/ProjectsContainer";
-import * as elementGenerator from "./elementGenerator";
+const projectsContainer = new ProjectsContainer();
 
-export default class viewController {
-    constructor(rootElement) {
-        this.root = rootElement;
-        this.projectsContainer = new ProjectsContainer();
+class viewController {
+    constructor() {
+        this.root = document.getElementById('app');
     }
 
     updateView() {
@@ -18,21 +17,67 @@ export default class viewController {
     }
 
     renderHeader() {
-        const header = elementGenerator.newHeaderElement(
-            this.projectsContainer
-        );
+        const header = document.createElement('header');
+        header.classList = 'header';
+        
+        const title = document.createElement('h1');
+        title.classList = 'header-title';
+        title.innerText = 'Todo List.';
+        header.appendChild(title);
+    
+        const addProjectButton = document.createElement('button');
+        addProjectButton.classList = 'header-new-group-button';
+        addProjectButton.innerText = 'Add List';
+        header.appendChild(addProjectButton);
+    
         this.root.appendChild(header);
-    }
+        }
 
     renderProjects() {
-        let projects = this.projectsContainer.getAllProjects();
+        let projects = projectsContainer.getAllProjects();
         projects.forEach(project => {
             this.renderProject(project);
         });
     }
 
-    renderProject(group) {
-        const projectElement = elementGenerator.newTodoGroupElement(group);
+    renderProject(project) {
+        const projectContainer = document.createElement('div');
+        projectContainer.classList.add('project-container');
+    
+        const title = this.makeProjectTitle(project.title);
+        projectContainer.appendChild(title);
+    
+        const body = this.makeProjectBody(project);
+        projectContainer.appendChild(body);
+    
         this.root.appendChild(projectElement);
     }
+
+    makeProjectTitle(title) {
+        const projectTitle = document.createElement('h3');
+        projectTitle.innerText = title;
+        projectTitle.classList.add('project-container-title');
+    
+        return projectTitle;
+    }
+    
+    makeProjectBody(project) {
+        const projectBody = document.createElement('div');
+    
+        const todos = project.getAllTodos()
+        todos.forEach(todo => {
+            projectBody.appendChild(newTodoElement(todo));
+        });
+    
+        return projectBody;
+    }
+    
+    makeTodoElement(todo) {
+        let todoElement = document.createElement('p');
+        todoElement.innerHTML = todo.title;
+    
+        return todoElement;
+    }
 }
+
+export default new viewController();
