@@ -1,6 +1,6 @@
 import Todo from "./Todo";
 
-export default class TodoGroup {
+export default class Project {
     constructor (title) {
         this.title = title;
         this.todos = [];

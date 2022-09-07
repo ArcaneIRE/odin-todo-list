@@ -1,16 +1,16 @@
-import TodoGroupsContainer from "../logic/TodoGroupsContainer";
+import ProjectsContainer from "../logic/ProjectsContainer";
 import * as elementGenerator from "./elementGenerator";
 
 export default class viewController {
     constructor(rootElement) {
         this.root = rootElement;
-        this.TodoGroupsContainer = new TodoGroupsContainer();
+        this.projectsContainer = new ProjectsContainer();
     }
 
     updateView() {
         this.clearView();
         this.renderHeader();
-        this.renderTodoGroups();   
+        this.renderProjects();   
     }
 
     clearView() {
@@ -18,19 +18,21 @@ export default class viewController {
     }
 
     renderHeader() {
-        let header = elementGenerator.newHeaderElement();
+        const header = elementGenerator.newHeaderElement(
+            this.projectsContainer
+        );
         this.root.appendChild(header);
     }
 
-    renderTodoGroups() {
-        let groups = this.TodoGroupsContainer.getAllTodoGroups();
-        groups.forEach(group => {
-            this.renderTodoGroup(group);
+    renderProjects() {
+        let projects = this.projectsContainer.getAllProjects();
+        projects.forEach(project => {
+            this.renderProject(project);
         });
     }
 
-    renderTodoGroup(group) {
-        const groupNode = elementGenerator.newTodoGroupElement(group);
-        this.root.appendChild(groupNode);
+    renderProject(group) {
+        const projectElement = elementGenerator.newTodoGroupElement(group);
+        this.root.appendChild(projectElement);
     }
 }

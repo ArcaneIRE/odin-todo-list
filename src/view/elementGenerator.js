@@ -1,4 +1,4 @@
-import { newTodoGroupElement } from "./todoGroupElementGenerator";
-import { newHeaderElement } from "./headerElementGenerator";
+import { makeProjectElement } from "./projectElementGenerator";
+import { makeHeaderElement  } from "./headerElementGenerator";
 
-export { newTodoGroupElement, newHeaderElement }
+export { makeProjectElement, makeHeaderElement  }

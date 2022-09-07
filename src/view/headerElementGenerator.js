@@ -1,8 +1,8 @@
-function newHeaderElement() {
+function makeHeaderElement() {
     const headerGenerator = new HeaderGenerator();
     
     headerGenerator.addTitle();
-    headerGenerator.addNewGroupButton();
+    headerGenerator.addProjectButton();
 
     return headerGenerator.getHeader();
 }
@@ -21,12 +21,12 @@ class HeaderGenerator {
         this.header.appendChild(title);
     }
 
-    addNewGroupButton() {
-        const newGroupButton = document.createElement('button');
-        newGroupButton.classList = 'header-new-group-button';
-        newGroupButton.innerText = 'Add List';
+    addProjectButton() {
+        const addProjectButton = document.createElement('button');
+        addProjectButton.classList = 'header-new-group-button';
+        addProjectButton.innerText = 'Add List';
 
-        this.header.appendChild(newGroupButton);
+        this.header.appendChild(addProjectButton);
     }
 
     getHeader() {
@@ -34,4 +34,4 @@ class HeaderGenerator {
     }
 }
 
-export { newHeaderElement }
+export { makeHeaderElement }
