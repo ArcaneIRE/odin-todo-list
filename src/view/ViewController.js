@@ -1,9 +1,15 @@
-import ProjectsContainer from "../logic/ProjectsContainer";
-const projectsContainer = new ProjectsContainer();
+import PubSub from "pubsub-js";
+import {PROJECTS_UPDATED, CREATE_PROJECT} from '../event-types';
 
 class viewController {
     constructor() {
         this.root = document.getElementById('app');
+
+        this.projects = [];
+        PubSub.subscribe(PROJECTS_UPDATED, (msg, projects) => {
+            this.projects = projects;
+            this.updateView();
+        })
     }
 
     updateView() {
@@ -28,14 +34,16 @@ class viewController {
         const addProjectButton = document.createElement('button');
         addProjectButton.classList = 'header-new-group-button';
         addProjectButton.innerText = 'Add Project';
+        addProjectButton.addEventListener('click', () => {
+            PubSub.publish(CREATE_PROJECT);
+        })
         header.appendChild(addProjectButton);
     
         this.root.appendChild(header);
         }
 
     renderProjects() {
-        let projects = projectsContainer.getAllProjects();
-        projects.forEach(project => {
+        this.projects.forEach(project => {
             this.renderProject(project);
         });
     }

@@ -1,8 +1,9 @@
 import Todo from "./Todo";
 
 export default class Project {
-    constructor (title) {
-        this.title = title;
+    constructor (id) {
+        this.id = id;
+        this.title = 'New Project';
         this.todos = [];
     }
 
