@@ -1,6 +1,6 @@
 import Project from "./Project";
 import PubSub from 'pubsub-js';
-import {PROJECTS_UPDATED, CREATE_PROJECT} from '../event-types';
+import {PROJECTS_UPDATED, CREATE_PROJECT, DELETE_PROJECT} from '../event-types';
 
 class ProjectsContainer {
     constructor() {
@@ -18,14 +18,19 @@ class ProjectsContainer {
         PubSub.publish(PROJECTS_UPDATED, this.projects);
     }
     
-    deleteProject(index) {
-        this.projects.splice(index, 1);
+    deleteProject(projectId) {
+        this.projects = this.projects.filter(
+            project => project.id !== projectId
+        );
+
+        PubSub.publish(PROJECTS_UPDATED, this.projects);
     }
     
     pubsubSubscribe() {
         const pubsubTopicTokens = {}
 
         pubsubTopicTokens.newProject = this.newProjectSubscribe();
+        pubsubTopicTokens.newProject = this.deleteProjectSubscribe();
 
         return pubsubTopicTokens;
     }
@@ -33,6 +38,12 @@ class ProjectsContainer {
     newProjectSubscribe() {
         PubSub.subscribe(CREATE_PROJECT, () => {
             this.newProject();
+        });
+    }
+
+    deleteProjectSubscribe() {
+        PubSub.subscribe(DELETE_PROJECT, (msg, projectId) => {
+            this.deleteProject(projectId);
         });
     }
 
