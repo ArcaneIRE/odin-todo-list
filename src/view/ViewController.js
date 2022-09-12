@@ -1,5 +1,6 @@
 import PubSub from "pubsub-js";
-import {PROJECTS_UPDATED, CREATE_PROJECT} from '../event-types';
+import {PROJECTS_UPDATED} from '../event-types';
+import {createHeader} from './Header';
 
 class viewController {
     constructor() {
@@ -23,24 +24,9 @@ class viewController {
     }
 
     renderHeader() {
-        const header = document.createElement('header');
-        header.classList = 'header';
-        
-        const title = document.createElement('h1');
-        title.classList = 'header-title';
-        title.innerText = 'Todo List.';
-        header.appendChild(title);
-    
-        const addProjectButton = document.createElement('button');
-        addProjectButton.classList = 'header-new-group-button';
-        addProjectButton.innerText = 'Add Project';
-        addProjectButton.addEventListener('click', () => {
-            PubSub.publish(CREATE_PROJECT);
-        })
-        header.appendChild(addProjectButton);
-    
+        const header = createHeader();
         this.root.appendChild(header);
-        }
+    }
 
     renderProjects() {
         this.projects.forEach(project => {
