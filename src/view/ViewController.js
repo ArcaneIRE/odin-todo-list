@@ -1,5 +1,5 @@
 import PubSub from "pubsub-js";
-import {PROJECTS_UPDATED} from '../event-types';
+import {UPDATE_VIEW} from '../event-types';
 import {createHeader} from './Header';
 import {createProjectsContainer} from './ProjectsContainer';
 
@@ -8,7 +8,7 @@ class viewController {
         this.root = document.getElementById('app');
 
         this.projects = [];
-        PubSub.subscribe(PROJECTS_UPDATED, (msg, projects) => {
+        PubSub.subscribe(UPDATE_VIEW, (msg, projects) => {
             this.projects = projects;
             this.updateView();
         })

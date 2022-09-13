@@ -1,6 +1,6 @@
 import Project from "./Project";
 import PubSub from 'pubsub-js';
-import {PROJECTS_UPDATED, CREATE_PROJECT, DELETE_PROJECT} from '../event-types';
+import {MODEL_UPDATED, UPDATE_VIEW, CREATE_PROJECT, DELETE_PROJECT} from '../event-types';
 
 class ProjectsContainer {
     constructor() {
@@ -8,31 +8,21 @@ class ProjectsContainer {
 
         this.nextProjectId = 0;
 
-        this.pubsubTopicTokens = this.pubsubSubscribe();
+        this.pubsubSubscribe();
     }
-
-    newProject () {
-        this.projects.push(new Project(this.nextProjectId));
-        this.nextProjectId++
-        
-        PubSub.publish(PROJECTS_UPDATED, this.projects);
-    }
-    
-    deleteProject(projectId) {
-        this.projects = this.projects.filter(
-            project => project.id !== projectId
-        );
-
-        PubSub.publish(PROJECTS_UPDATED, this.projects);
-    }
-    
+     
     pubsubSubscribe() {
-        const pubsubTopicTokens = {}
+        this.pubsubTopicTokens = {}
 
-        pubsubTopicTokens.newProject = this.newProjectSubscribe();
-        pubsubTopicTokens.newProject = this.deleteProjectSubscribe();
+        this.pubsubTopicTokens.modelUpdated = this.modelUpdatedSubscribe();
+        this.pubsubTopicTokens.newProject = this.newProjectSubscribe();
+        this.pubsubTopicTokens.deleteProject = this.deleteProjectSubscribe();
+    }
 
-        return pubsubTopicTokens;
+    modelUpdatedSubscribe() {
+        PubSub.subscribe(MODEL_UPDATED, () => {
+            PubSub.publish(UPDATE_VIEW, this.projects);
+        });
     }
 
     newProjectSubscribe() {
@@ -45,6 +35,21 @@ class ProjectsContainer {
         PubSub.subscribe(DELETE_PROJECT, (msg, projectId) => {
             this.deleteProject(projectId);
         });
+    }
+
+    newProject () {
+        this.projects.push(new Project(this.nextProjectId));
+        this.nextProjectId++
+        
+        PubSub.publish(MODEL_UPDATED);
+    }
+    
+    deleteProject(projectId) {
+        this.projects = this.projects.filter(
+            project => project.id !== projectId
+        );
+
+        PubSub.publish(MODEL_UPDATED);
     }
 }
 
