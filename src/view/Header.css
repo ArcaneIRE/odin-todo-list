@@ -1,0 +1,39 @@
+@import '../common.css';
+
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: .9rem 0;
+    color: var(--grey-lightest);
+    background-color: var(--primary-color);
+}
+
+.title {
+    margin: 0;
+    letter-spacing: 0.1rem;
+    font-size: 2rem;
+}
+
+.new-group-button {
+    box-sizing: border-box;
+    height: 2.6rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 1.1rem;
+    border-radius: 2.5rem;
+    border: 2px solid var(--grey-light);
+    font-weight: 700;
+    color: inherit;
+    background-color: transparent;
+    transition: background-color .1s;
+    cursor: pointer;
+}
+
+.new-group-button:hover {
+    background-color: var(--primary-color-light);
+}
+
+.new-group-button:active {
+    background-color: var(--primary-color-dark);
+}
