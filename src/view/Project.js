@@ -24,9 +24,11 @@ class Project {
     addBody() {
         const body = document.createElement('div');
     
-        const todos = this.projectData.getAllTodos()
+        const todos = this.projectData.todos;
         todos.forEach(todo => {
-            body.appendChild(newTodoElement(todo));
+            const todoElement = document.createElement('p');
+            todoElement.textContent = todo.title;
+            body.appendChild(todoElement);
         });
     
         this.project.appendChild(body);

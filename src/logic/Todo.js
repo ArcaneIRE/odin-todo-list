@@ -1,5 +1,9 @@
 export default class Todo {
-    constructor(title) {
-        this.title = title
+    constructor() {
+        this.title = 'New Todo';
+    }
+
+    edit(newData) {
+        this.title = newData.title;
     }
 }
