@@ -46,10 +46,6 @@ class ProjectsContainer {
             this.deleteProject(projectId);
         });
     }
-
-    getAllProjects() {
-        return this.projects;
-    }
 }
 
 export default new ProjectsContainer;
