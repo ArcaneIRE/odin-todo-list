@@ -5,7 +5,7 @@
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    padding: .9rem 0;
+    padding: .7rem 0;
     color: var(--grey-lightest);
     background-color: var(--primary-color);
 }
@@ -13,7 +13,7 @@
 .title {
     margin: 0;
     letter-spacing: 0.1rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .new-group-button {
@@ -36,4 +36,5 @@
 
 .new-group-button:active {
     background-color: var(--primary-color-dark);
+    scale: 0.95;
 }
