@@ -32,7 +32,8 @@
 
 .title {
     margin: 0;
-    font-size: 1.5rem;
+    margin-right: 1.3rem;
+    font-size: 1.3rem;
     color: var(--grey-darkest)
 }
 
@@ -60,8 +61,8 @@
 }
 
 .deleteProjectIcon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.3rem;
+    width: 1.3rem;
 }
 
 .container .body {
