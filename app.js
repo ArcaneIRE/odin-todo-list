@@ -246,7 +246,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\n    constructor() {\n        this.title = 'New Todo';\n    }\n\n    edit(newData) {\n        this.title = newData.title;\n    }\n}\n\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/Todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\n    constructor() {\n        this.title = 'Pet cat';\n    }\n\n    edit(newData) {\n        this.title = newData.title;\n    }\n}\n\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/Todo.js?");
 
 /***/ }),
 
