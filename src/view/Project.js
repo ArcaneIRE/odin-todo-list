@@ -1,5 +1,5 @@
 import PubSub from "pubsub-js";
-import { ADD_TODO, DELETE_PROJECT, EXPAND_TOGGLED } from "../event-types";
+import { ADD_TODO, CHANGE_PROJECT_TITLE, DELETE_PROJECT, EXPAND_TOGGLED } from "../event-types";
 
 import projectStyles from './Project.css';
 
@@ -54,8 +54,52 @@ class Project {
         const title = document.createElement('h3');
         title.textContent = this.projectData.title;
         title.classList.add(projectStyles['title']);
+
+        title.addEventListener('click', (e) => {
+            this.titleChange(e, title);
+        })
     
         header.appendChild(title);
+    }
+
+    titleChange(event, title) {
+        event.stopPropagation();
+
+        const titleInputForm = document.createElement('form');
+        titleInputForm.id = 'titleInputForm';
+        titleInputForm.classList.add(projectStyles.titleInputForm);
+        titleInputForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let input;
+            if (titleInput.value !== '') {
+                input = titleInput.value;
+            } else {
+                input = titleInput.placeholder;
+            }
+            
+            const id = this.projectData.id.toString();
+            const topic = CHANGE_PROJECT_TITLE + id;
+            PubSub.publish(topic, input);
+        });
+
+        const titleInput = document.createElement('input');
+        titleInput.id = 'titleInput';
+        titleInput.classList.add(projectStyles.titleInput);
+        titleInput.type = 'text';
+        titleInput.maxLength = 20;
+        titleInput.placeholder = title.textContent;
+        titleInput.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        titleInput.addEventListener('keyup', e => {
+            if(e.key === 'Enter') {
+                titleInputForm.requestSubmit();
+            }
+        })
+        titleInputForm.appendChild(titleInput);
+
+        title.replaceWith(titleInputForm);
+        titleInput.focus();
     }
 
     addDeleteProjectButton(header) {
