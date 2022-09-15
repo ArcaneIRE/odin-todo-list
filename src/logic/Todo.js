@@ -1,6 +1,6 @@
 export default class Todo {
     constructor() {
-        this.title = 'New Todo';
+        this.title = 'Pet cat';
     }
 
     edit(newData) {
