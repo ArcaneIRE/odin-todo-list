@@ -1,5 +1,7 @@
 import { createProject } from "./Project";
 
+import projectsContainerStyles from './ProjectsContainer.css';
+
 export function createProjectsContainer(projects) {
     let projectsContainerMaker = new ProjectsContainer(projects);
     projectsContainerMaker.addAllProjects();
@@ -11,7 +13,7 @@ class ProjectsContainer {
     constructor(projects) {
         this.projects = projects;
         this.projectsContainer = document.createElement('div');
-        this.projectsContainer.id = 'projects-container';
+        this.projectsContainer.id = projectsContainerStyles['container'];
     }
 
     addAllProjects() {

@@ -6,3 +6,4 @@ export const CHANGE_PROJECT_TITLE = 'changeProjectTitle.';
 export const ADD_TODO = 'addTodoToProject.';
 export const EDIT_TODO = 'editTodo.';
 export const DELETE_TODO = 'deleteTodoFromProject.';
+export const EXPAND_TOGGLED = 'expandToggled.';

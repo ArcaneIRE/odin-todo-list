@@ -15,3 +15,7 @@
     --grey-dark: #6B7280;
     --grey-darkest: #111827;
 }
+
+:global(#app) {
+    min-height: 100vh;
+}

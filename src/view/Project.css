@@ -1,0 +1,115 @@
+@import '../common.css';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem .7rem;
+    border-radius: .4rem;
+    padding: 0rem 1rem;
+    background-color: var(--grey-lightest);
+    cursor: pointer;
+}
+
+.container.expanded {
+    outline: 2px solid var(--primary-color-dark);
+    cursor: initial;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0rem;
+}
+
+.container.expanded header {
+    border-bottom: 2px solid var(--grey-dark);
+}
+
+.title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--grey-darkest)
+}
+
+.deleteProjectButton {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    right: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    filter: brightness(1);
+}
+
+.deleteProjectButton:hover {
+    filter: brightness(2);
+}
+
+.deleteProjectButton:active {
+    filter: brightness(1);
+    scale: 0.9;
+}
+
+.deleteProjectIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.container .body {
+    display: none;
+}
+
+.container.expanded .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todos {
+    margin: 0;
+}
+
+.newTodoButton {
+    display: none;
+}
+
+.expanded .newTodoButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin: .7rem 0rem;
+    padding: 0.4rem 3rem;
+    border: none;
+    border-radius: .7rem;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.expanded .newTodoButton:hover {
+    background-color: var(--grey);
+}
+
+.expanded .newTodoButton:active {
+    background-color: var(--grey-dark);
+}
+
+.newTodoButton p {
+    margin: 0;
+}
+
+.newTodoButton img {
+    height: 1.5rem;
+    width: 1.5rem;
+}
