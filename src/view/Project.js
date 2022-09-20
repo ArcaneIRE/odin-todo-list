@@ -1,5 +1,5 @@
 import PubSub from "pubsub-js";
-import { ADD_TODO, CHANGE_PROJECT_TITLE, DELETE_PROJECT, EXPAND_TOGGLED } from "../event-types";
+import { ADD_TODO, CHANGE_PROJECT_TITLE, DELETE_PROJECT, PROJECT_EXPAND_TOGGLE } from "../event-types";
 
 import projectStyles from './Project.css';
 
@@ -30,7 +30,7 @@ class Project {
         
         container.addEventListener('click', () => {
             const id = this.projectData.id.toString();
-            const expandTopic = EXPAND_TOGGLED + id;
+            const expandTopic = PROJECT_EXPAND_TOGGLE + id;
             PubSub.publish(expandTopic);
         });
         this.project = container;

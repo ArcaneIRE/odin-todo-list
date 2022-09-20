@@ -3,10 +3,10 @@ import PubSub from "pubsub-js";
 import { 
     MODEL_UPDATED, 
     CHANGE_PROJECT_TITLE, 
+    PROJECT_EXPAND_TOGGLE,
     ADD_TODO, 
     EDIT_TODO, 
-    DELETE_TODO, 
-    EXPAND_TOGGLED
+    DELETE_TODO,
 } from "../event-types";
 
 export default class Project {
@@ -21,10 +21,10 @@ export default class Project {
 
     pubsubSubscribe() {
         this.changeTitleSubscribe();
+        this.expandProjectToggleSubscribe();
         this.addTodoSubscribe();
         this.editTodoSubscribe();
         this.deleteTodoSubscribe();
-        this.expandToggledSubscribe();
     }
 
     changeTitleSubscribe() {
@@ -59,8 +59,8 @@ export default class Project {
         })
     }
 
-    expandToggledSubscribe() {
-        const topic = EXPAND_TOGGLED + this.id.toString();
+    expandProjectToggleSubscribe() {
+        const topic = PROJECT_EXPAND_TOGGLE + this.id.toString();
         PubSub.subscribe(topic, () => {
             this.isExpanded = !this.isExpanded;
             PubSub.publish(MODEL_UPDATED);
