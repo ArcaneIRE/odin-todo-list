@@ -1,5 +1,6 @@
 import PubSub from "pubsub-js";
 import { ADD_TODO, CHANGE_PROJECT_TITLE, DELETE_PROJECT, PROJECT_EXPAND_TOGGLE } from "../event-types";
+import { createTodo } from "./Todo";
 
 import projectStyles from './Project.css';
 
@@ -158,11 +159,11 @@ class Project {
         todosContainer.classList.add(projectStyles['todos']);
         
         const todos = this.projectData.todos;
-        todos.forEach(todo => {
-            const todoElement = document.createElement('p');
-            todoElement.textContent = todo.title;
-            todoElement.classList.add(projectStyles['todo']);
-            todosContainer.appendChild(todoElement);
+        let todoIndex = 0;
+        todos.forEach(todoData => {
+            const todo = createTodo(this.projectData.id, todoIndex, todoData);
+            todoIndex++;
+            todosContainer.appendChild(todo);
         });
     
         body.appendChild(todosContainer);

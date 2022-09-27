@@ -45,8 +45,10 @@ export default class Project {
 
     editTodoSubscribe() {
         const topic = EDIT_TODO + this.id.toString();
-        PubSub.subscribe(topic, (msg, {index, TodoData}) => {
-            this.todos[index].edit(TodoData);
+        PubSub.subscribe(topic, (msg, editInfo) => {
+            const index = editInfo.index;
+            const todoData = editInfo.editData;
+            this.todos[index].edit(todoData);
             PubSub.publish(MODEL_UPDATED);
         })
     }

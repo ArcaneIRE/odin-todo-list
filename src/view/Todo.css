@@ -1,0 +1,170 @@
+@import '../common.css';
+
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+    width: 100%;
+    max-width: 20rem;
+    padding: .2rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.container.expanded {
+    background-color: var(--grey-light);
+    cursor: initial;
+}
+
+.head {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .2rem;
+    height: 2rem;
+    width: 100%;
+}
+
+.checkbox {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    margin: .2rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+.title {
+    margin: 0;
+    max-width: calc(100% - 2rem);
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.container.expanded .title {
+    overflow: auto;
+    white-space: initial;
+    text-overflow: initial;
+}
+
+.titleInputForm {
+    flex: 1 1 auto;
+    height: 1.4rem;
+    margin: 0;
+    padding: 0;
+    width: 85%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+.titleInput {
+    height: 1.3rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    outline: none;
+    overflow: visible;
+    color:inherit;
+    background-color: transparent;
+}
+
+.deleteTodoButton {
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    filter: brightness(1);
+}
+
+.deleteTodoButton:hover {
+    filter: brightness(2);
+}
+
+.deleteTodoButton:active {
+    filter: brightness(1);
+    scale: 0.9;
+}
+
+.deleteTodoIcon {
+    height: 1.3rem;
+    width: 1.3rem;
+}
+
+.body {
+    display: none;
+}
+
+.container.expanded .body {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: .2rem;
+    padding: .2rem;
+    border-top: 1px solid var(--grey-dark);;
+}
+
+.description {
+    margin: 0;
+    padding: 0.2rem;
+    word-break: break-all;
+}
+
+.descInputForm {
+    height: auto;
+    margin: 0;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+.descInput {
+    height: 5rem;
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1rem;
+    outline: none;
+    color:inherit;
+    resize: vertical;
+    background-color: transparent;
+}
+
+.priority {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    margin: auto .2rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.priority[data-priority='0']{
+    background-color: rgb(0, 202, 0);
+}
+
+.priority[data-priority='1']{
+    background-color: rgb(255, 208, 0);
+}
+
+.priority[data-priority='2']{
+    background-color: #ff1b1b;
+}
