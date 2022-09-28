@@ -1,10 +1,10 @@
 export default class Todo {
     constructor() {
         this.title = 'New Todo';
-        this.description = 'Empty Description';
-        this.priority = 0;
-        this.isExpanded = false;
         this.isChecked = false;
+        this.isExpanded = false;
+        this.priority = 0;
+        this.description = 'Empty Description';
     }
 
     edit(editData) {
