@@ -268,7 +268,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\n    constructor() {\n        this.title = 'New Todo';\n        this.description = 'Empty Description';\n        this.priority = 0;\n        this.isExpanded = false;\n        this.isChecked = false;\n    }\n\n    edit(editData) {\n        let entries = Object.entries(editData);\n        for (const [key, value] of entries) {\n            this[key] = value;\n        }\n    }\n}\n\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/Todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\n    constructor() {\n        this.title = 'New Todo';\n        this.isChecked = false;\n        this.isExpanded = false;\n        this.priority = 0;\n        this.description = 'Empty Description';\n    }\n\n    edit(editData) {\n        let entries = Object.entries(editData);\n        for (const [key, value] of entries) {\n            this[key] = value;\n        }\n    }\n}\n\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/Todo.js?");
 
 /***/ }),
 
