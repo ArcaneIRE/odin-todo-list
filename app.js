@@ -235,7 +235,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _view_ViewController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./view/ViewController */ \"./src/view/ViewController.js\");\n/* harmony import */ var _logic_ProjectsContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logic/ProjectsContainer */ \"./src/logic/ProjectsContainer.js\");\n\n\n\n_view_ViewController__WEBPACK_IMPORTED_MODULE_0__[\"default\"].updateView();\n\n\n//# sourceURL=webpack://odin-todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _logic_ProjectsContainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./logic/ProjectsContainer */ \"./src/logic/ProjectsContainer.js\");\n/* harmony import */ var _logic_ProjectsStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logic/ProjectsStorage */ \"./src/logic/ProjectsStorage.js\");\n/* harmony import */ var _view_ViewController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./view/ViewController */ \"./src/view/ViewController.js\");\n\n\n\n\n_view_ViewController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].updateView();\n\n\n//# sourceURL=webpack://odin-todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -258,6 +258,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Project */ \"./src/logic/Project.js\");\n/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pubsub-js */ \"./node_modules/pubsub-js/src/pubsub.js\");\n/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _event_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../event-types */ \"./src/event-types.js\");\n\n\n\n\nclass ProjectsContainer {\n    constructor() {\n        this.projects = []\n\n        this.nextProjectId = 0;\n\n        this.pubsubSubscribe();\n    }\n     \n    pubsubSubscribe() {\n        this.pubsubTopicTokens = {}\n\n        this.pubsubTopicTokens.modelUpdated = this.modelUpdatedSubscribe();\n        this.pubsubTopicTokens.newProject = this.newProjectSubscribe();\n        this.pubsubTopicTokens.deleteProject = this.deleteProjectSubscribe();\n    }\n\n    modelUpdatedSubscribe() {\n        pubsub_js__WEBPACK_IMPORTED_MODULE_1___default().subscribe(_event_types__WEBPACK_IMPORTED_MODULE_2__.MODEL_UPDATED, () => {\n            pubsub_js__WEBPACK_IMPORTED_MODULE_1___default().publish(_event_types__WEBPACK_IMPORTED_MODULE_2__.UPDATE_VIEW, this.projects);\n        });\n    }\n\n    newProjectSubscribe() {\n        pubsub_js__WEBPACK_IMPORTED_MODULE_1___default().subscribe(_event_types__WEBPACK_IMPORTED_MODULE_2__.CREATE_PROJECT, () => {\n            this.newProject();\n        });\n    }\n\n    deleteProjectSubscribe() {\n        pubsub_js__WEBPACK_IMPORTED_MODULE_1___default().subscribe(_event_types__WEBPACK_IMPORTED_MODULE_2__.DELETE_PROJECT, (msg, projectId) => {\n            this.deleteProject(projectId);\n        });\n    }\n\n    newProject () {\n        this.projects.push(new _Project__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.nextProjectId));\n        this.nextProjectId++\n        \n        pubsub_js__WEBPACK_IMPORTED_MODULE_1___default().publish(_event_types__WEBPACK_IMPORTED_MODULE_2__.MODEL_UPDATED);\n    }\n    \n    deleteProject(projectId) {\n        this.projects = this.projects.filter(\n            project => project.id !== projectId\n        );\n\n        pubsub_js__WEBPACK_IMPORTED_MODULE_1___default().publish(_event_types__WEBPACK_IMPORTED_MODULE_2__.MODEL_UPDATED);\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new ProjectsContainer);\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/ProjectsContainer.js?");
+
+/***/ }),
+
+/***/ "./src/logic/ProjectsStorage.js":
+/*!**************************************!*\
+  !*** ./src/logic/ProjectsStorage.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pubsub-js */ \"./node_modules/pubsub-js/src/pubsub.js\");\n/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _event_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../event-types */ \"./src/event-types.js\");\n/* harmony import */ var _defaultData_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./defaultData.json */ \"./src/logic/defaultData.json\");\n\n\n\n\nconst storage = window.localStorage;\n\nclass ProjectsStorage {\n    constructor(){\n        if (!this.isStorageAvailable()) {\n            return;\n        }\n\n        if (storage.length === 0) {\n            const defaultProjects = JSON.stringify(_defaultData_json__WEBPACK_IMPORTED_MODULE_2__.projects);\n            storage.setItem(\"projects\", defaultProjects);\n        }\n\n        this.publishStorage();\n    }\n\n    isStorageAvailable() {\n        try {\n            const x = '__storage_test__';\n            storage.setItem(x, x);\n            storage.removeItem(x);\n            return true;\n        } catch {\n            console.log(\"LocalStorage not available\");\n            return false;\n        }\n    }\n\n    publishStorage() {\n        const projectsJson = storage.getItem(\"projects\");\n        this.projects = JSON.parse(projectsJson);\n        this.projects.forEach((project, id) => {\n            this.publishProject(project, id);\n        });\n    }\n\n    publishProject(project, id) {\n        this.createProject(project, id);\n        this.addTodosToProject(project.todos, id);\n    }\n\n    createProject(project, id) {\n        pubsub_js__WEBPACK_IMPORTED_MODULE_0___default().publishSync(_event_types__WEBPACK_IMPORTED_MODULE_1__.CREATE_PROJECT);\n        \n        const changeTitleTopic = _event_types__WEBPACK_IMPORTED_MODULE_1__.CHANGE_PROJECT_TITLE + id;\n        pubsub_js__WEBPACK_IMPORTED_MODULE_0___default().publish(changeTitleTopic, project.title);\n        if(project.isExpanded) {\n            const expandTopic = _event_types__WEBPACK_IMPORTED_MODULE_1__.PROJECT_EXPAND_TOGGLE + id;\n            pubsub_js__WEBPACK_IMPORTED_MODULE_0___default().publish(expandTopic);\n        }\n    }\n\n    addTodosToProject(todos, projectId) {\n        const addTodoTopic = _event_types__WEBPACK_IMPORTED_MODULE_1__.ADD_TODO + projectId;\n        const editTodoTopic = _event_types__WEBPACK_IMPORTED_MODULE_1__.EDIT_TODO + projectId;\n        todos.forEach((todo, index) => {\n            pubsub_js__WEBPACK_IMPORTED_MODULE_0___default().publish(addTodoTopic);\n            pubsub_js__WEBPACK_IMPORTED_MODULE_0___default().publish(editTodoTopic, {index, editData: todo});\n        });\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new ProjectsStorage);\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/ProjectsStorage.js?");
 
 /***/ }),
 
@@ -346,6 +357,17 @@ eval("module.exports = __webpack_require__.p + \"87835aa936fe2052baa3.svg\";\n\n
 
 "use strict";
 eval("module.exports = __webpack_require__.p + \"09d4534bf8c8ba33635c.svg\";\n\n//# sourceURL=webpack://odin-todo-list/./src/images/x-icon.svg?");
+
+/***/ }),
+
+/***/ "./src/logic/defaultData.json":
+/*!************************************!*\
+  !*** ./src/logic/defaultData.json ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = JSON.parse('{\"projects\":[{\"title\":\"Default Project\",\"isExpanded\":true,\"todos\":[{\"title\":\"Walk Dog\",\"isChecked\":true,\"isExpanded\":false,\"priority\":1},{\"title\":\"Pet cat\",\"isChecked\":false,\"isExpanded\":true,\"priority\":2,\"description\":\"Avoid the tummy\"},{\"title\":\"Floss\",\"isChecked\":false,\"isExpanded\":false,\"priority\":0}]}]}');\n\n//# sourceURL=webpack://odin-todo-list/./src/logic/defaultData.json?");
 
 /***/ })
 
