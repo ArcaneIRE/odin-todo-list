@@ -1,0 +1,29 @@
+{
+    "projects": [
+        {
+            "title": "Default Project",
+            "isExpanded": true,
+            "todos": [
+                {
+                    "title": "Walk Dog",
+                    "isChecked": true,
+                    "isExpanded": false,
+                    "priority": 1
+                },
+                {
+                    "title": "Pet cat",
+                    "isChecked": false,
+                    "isExpanded": true,
+                    "priority": 2,
+                    "description": "Avoid the tummy"
+                },
+                {
+                    "title": "Floss",
+                    "isChecked": false,
+                    "isExpanded": false,
+                    "priority": 0
+                }
+            ]
+        }
+    ]
+}

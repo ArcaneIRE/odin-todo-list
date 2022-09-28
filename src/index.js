@@ -1,4 +1,5 @@
-import ViewController from "./view/ViewController";
 import ProjectsContainer from "./logic/ProjectsContainer";
+import ProjectsStorage from "./logic/ProjectsStorage";
+import ViewController from "./view/ViewController";
 
 ViewController.updateView();
