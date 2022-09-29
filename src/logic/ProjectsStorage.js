@@ -16,6 +16,8 @@ class ProjectsStorage {
         }
 
         this.publishStorage();
+        
+        this.subscribeToDataUpdates();
     }
 
     isStorageAvailable() {
@@ -61,6 +63,17 @@ class ProjectsStorage {
             PubSub.publish(addTodoTopic);
             PubSub.publish(editTodoTopic, {index, editData: todo});
         });
+    }
+
+    subscribeToDataUpdates() {
+        PubSub.subscribe(events.UPDATE_VIEW, (msg, projects) => {
+            this.storeProjects(projects);
+        });
+    }
+
+    storeProjects(projects) {
+        const jsonProjects = JSON.stringify(projects);
+        storage.setItem("projects", jsonProjects);
     }
 }
 
