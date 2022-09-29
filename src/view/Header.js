@@ -5,8 +5,6 @@ import headerStyles from './Header.css';
 
 export function createHeader() {
     const headerMaker = new Header();
-    headerMaker.addTitle();
-    headerMaker.addNewProjectButton();
 
     return headerMaker.getElement();
 }
@@ -15,23 +13,35 @@ class Header {
     constructor() {
         this.header = document.createElement('header');
         this.header.classList = headerStyles['header'];
+
+        this.addContentContainer();
     }
 
-    addTitle() {
+    addContentContainer() {
+        const container = document.createElement('div');
+        container.classList = headerStyles['contentContainer']
+        
+        this.addTitle(container);
+        this.addNewProjectButton(container);
+
+        this.header.appendChild(container);
+    }
+
+    addTitle(container) {
         const title = document.createElement('h1');
         title.classList = headerStyles['title'];
         title.innerText = 'Todo List.';
-        this.header.appendChild(title);
+        container.appendChild(title);
     }
 
-    addNewProjectButton() {
+    addNewProjectButton(container) {
         const addProjectButton = document.createElement('button');
         addProjectButton.classList = headerStyles['new-group-button'];
         addProjectButton.innerText = 'New Project';
         addProjectButton.addEventListener('click', () => {
             PubSub.publish(CREATE_PROJECT);
         })
-        this.header.appendChild(addProjectButton);
+        container.appendChild(addProjectButton);
     }
 
     getElement() {
