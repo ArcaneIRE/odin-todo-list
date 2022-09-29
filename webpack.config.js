@@ -36,6 +36,13 @@ module.exports = {
         title: 'Todo List',
         template: './src/index.html',
         filename: './index.html',
+        meta: {
+          'og:site_name': {property: 'og:site_name', content: 'davidcorcoran.ie'},
+          'og:title': {property: 'og:title', content: 'Todo List'},
+          'og:image': {property: 'og:image', content: 'https://i.imgur.com/YlmXkeL.png'},
+          'og:description': {property: 'og:description', content: 'A simple todo list for The Odin Project.'},
+          'og:url': {property: 'og:url', content: 'https://www.davidcorcoran.ie/odin-todo-list/'},
+        }
     })
   ]
 };
