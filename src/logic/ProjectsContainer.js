@@ -12,11 +12,9 @@ class ProjectsContainer {
     }
      
     pubsubSubscribe() {
-        this.pubsubTopicTokens = {}
-
-        this.pubsubTopicTokens.modelUpdated = this.modelUpdatedSubscribe();
-        this.pubsubTopicTokens.newProject = this.newProjectSubscribe();
-        this.pubsubTopicTokens.deleteProject = this.deleteProjectSubscribe();
+        this.modelUpdatedSubscribe();
+        this.newProjectSubscribe();
+        this.deleteProjectSubscribe();
     }
 
     modelUpdatedSubscribe() {
