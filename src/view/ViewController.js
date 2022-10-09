@@ -1,38 +1,38 @@
-import PubSub from "pubsub-js";
-import {UPDATE_VIEW} from '../event-types';
-import {createHeader} from './Header';
-import {createProjectsContainer} from './ProjectsContainer';
+import PubSub from 'pubsub-js';
+import { UPDATE_VIEW } from '../event-types';
+import createHeader from './Header';
+import createProjectsContainer from './ProjectsContainer';
 
-class viewController {
-    constructor() {
-        this.root = document.getElementById('app');
+class ViewController {
+  constructor() {
+    this.root = document.getElementById('app');
 
-        this.projects = [];
-        PubSub.subscribe(UPDATE_VIEW, (msg, projects) => {
-            this.projects = projects;
-            this.updateView();
-        })
-    }
+    this.projects = [];
+    PubSub.subscribe(UPDATE_VIEW, (msg, projects) => {
+      this.projects = projects;
+      this.updateView();
+    });
+  }
 
-    updateView() {
-        this.clearView();
-        this.renderHeader();
-        this.renderProjects();   
-    }
+  updateView() {
+    this.clearView();
+    this.renderHeader();
+    this.renderProjects();
+  }
 
-    clearView() {
-        this.root.innerHTML = '';
-    }
+  clearView() {
+    this.root.innerHTML = '';
+  }
 
-    renderHeader() {
-        const header = createHeader();
-        this.root.appendChild(header);
-    }
+  renderHeader() {
+    const header = createHeader();
+    this.root.appendChild(header);
+  }
 
-    renderProjects() {
-        const projectsContainer = createProjectsContainer(this.projects);
-        this.root.appendChild(projectsContainer);
-    }
+  renderProjects() {
+    const projectsContainer = createProjectsContainer(this.projects);
+    this.root.appendChild(projectsContainer);
+  }
 }
 
-export default new viewController();
+export default new ViewController();

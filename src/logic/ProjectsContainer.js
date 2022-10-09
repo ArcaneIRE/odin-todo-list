@@ -1,54 +1,56 @@
-import Project from "./Project";
 import PubSub from 'pubsub-js';
-import {MODEL_UPDATED, UPDATE_VIEW, CREATE_PROJECT, DELETE_PROJECT} from '../event-types';
+import Project from './Project';
+import {
+  MODEL_UPDATED, UPDATE_VIEW, CREATE_PROJECT, DELETE_PROJECT,
+} from '../event-types';
 
 class ProjectsContainer {
-    constructor() {
-        this.projects = []
+  constructor() {
+    this.projects = [];
 
-        this.nextProjectId = 0;
+    this.nextProjectId = 0;
 
-        this.pubsubSubscribe();
-    }
-     
-    pubsubSubscribe() {
-        this.modelUpdatedSubscribe();
-        this.newProjectSubscribe();
-        this.deleteProjectSubscribe();
-    }
+    this.pubsubSubscribe();
+  }
 
-    modelUpdatedSubscribe() {
-        PubSub.subscribe(MODEL_UPDATED, () => {
-            PubSub.publish(UPDATE_VIEW, this.projects);
-        });
-    }
+  pubsubSubscribe() {
+    this.modelUpdatedSubscribe();
+    this.newProjectSubscribe();
+    this.deleteProjectSubscribe();
+  }
 
-    newProjectSubscribe() {
-        PubSub.subscribe(CREATE_PROJECT, () => {
-            this.newProject();
-        });
-    }
+  modelUpdatedSubscribe() {
+    PubSub.subscribe(MODEL_UPDATED, () => {
+      PubSub.publish(UPDATE_VIEW, this.projects);
+    });
+  }
 
-    deleteProjectSubscribe() {
-        PubSub.subscribe(DELETE_PROJECT, (msg, projectId) => {
-            this.deleteProject(projectId);
-        });
-    }
+  newProjectSubscribe() {
+    PubSub.subscribe(CREATE_PROJECT, () => {
+      this.newProject();
+    });
+  }
 
-    newProject () {
-        this.projects.push(new Project(this.nextProjectId));
-        this.nextProjectId++
-        
-        PubSub.publish(MODEL_UPDATED);
-    }
-    
-    deleteProject(projectId) {
-        this.projects = this.projects.filter(
-            project => project.id !== projectId
-        );
+  deleteProjectSubscribe() {
+    PubSub.subscribe(DELETE_PROJECT, (msg, projectId) => {
+      this.deleteProject(projectId);
+    });
+  }
 
-        PubSub.publish(MODEL_UPDATED);
-    }
+  newProject() {
+    this.projects.push(new Project(this.nextProjectId));
+    this.nextProjectId += 1;
+
+    PubSub.publish(MODEL_UPDATED);
+  }
+
+  deleteProject(projectId) {
+    this.projects = this.projects.filter(
+      (project) => project.id !== projectId,
+    );
+
+    PubSub.publish(MODEL_UPDATED);
+  }
 }
 
-export default new ProjectsContainer;
+export default new ProjectsContainer();

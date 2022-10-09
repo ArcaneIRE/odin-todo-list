@@ -1,16 +1,17 @@
 export default class Todo {
-    constructor() {
-        this.title = 'New Todo';
-        this.isChecked = false;
-        this.isExpanded = false;
-        this.priority = 0;
-        this.description = 'Empty Description';
-    }
+  constructor() {
+    this.title = 'New Todo';
+    this.isChecked = false;
+    this.isExpanded = false;
+    this.priority = 0;
+    this.description = 'Empty Description';
+  }
 
-    edit(editData) {
-        let entries = Object.entries(editData);
-        for (const [key, value] of entries) {
-            this[key] = value;
-        }
-    }
+  edit(editData) {
+    const entries = Object.entries(editData);
+
+    entries.forEach((key, value) => {
+      this[key] = value;
+    });
+  }
 }
