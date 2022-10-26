@@ -21,8 +21,6 @@ A simple vanilla javascript todo list app made for the Odin Project web developm
 
 I'm interested to learn more about how technologies like React and Web Components allow me to approach these sorts of issues.
 
----
-
 ## Project Requirements
 
 Can be seen on the Odin Project Site: [Project: Todo List](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)
