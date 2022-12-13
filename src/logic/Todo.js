@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 export default class Todo {
   constructor() {
     this.title = 'New Todo';
@@ -10,7 +11,7 @@ export default class Todo {
   edit(editData) {
     const entries = Object.entries(editData);
 
-    entries.forEach((key, value) => {
+    entries.forEach(([key, value]) => {
       this[key] = value;
     });
   }
