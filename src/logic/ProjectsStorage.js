@@ -68,7 +68,7 @@ class ProjectsStorage {
 
   subscribeToDataUpdates() {
     PubSub.subscribe(events.UPDATE_VIEW, (msg, projects) => {
-      this.storeProjects(projects);
+      ProjectsStorage.storeProjects(projects);
     });
   }
 
